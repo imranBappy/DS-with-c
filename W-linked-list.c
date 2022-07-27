@@ -20,7 +20,6 @@ void append(int data)
         head = newNode;
         return;
     }
-
     Node *node = head;
     while (node)
     {
@@ -89,6 +88,72 @@ Node *insert(int data, int position)
     prevNode->next = newNode;
     return newNode;
 }
+void last_to_first()
+{
+    Node *first = head;
+    Node *last = NULL;
+    while (first->next)
+    {
+        first = first->next;
+    }
+    last = first;
+    while (last)
+    {
+        printf("%d ", last->data);
+        last = last->prev;
+    }
+    printf("\n");
+}
+
+Node *search(int item)
+{
+    Node *node = head;
+    if (!node)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+
+    while (node)
+    {
+        if (node->data == item)
+        {
+            return node;
+        }
+        node = node->next;
+    }
+    return NULL;
+}
+
+Node *remove_node(int item)
+{
+
+    Node *node = head;
+    Node *prev = NULL;
+    if (!node)
+    {
+        printf("List is empty\n");
+        return NULL;
+    }
+    while (node)
+    {
+        if (node->data == item)
+        {
+            if (!prev)
+            {
+                node->prev = NULL;
+                head = node->next;
+                return node;
+            }
+            prev->next = node->next;
+            prev->next->prev = prev;
+            return node;
+        }
+        prev = node;
+        node = node->next;
+    }
+    return NULL;
+}
 
 int main()
 {
@@ -96,8 +161,19 @@ int main()
     append(100);
     append(200);
     insert(999, 99999);
+    remove_node(100);
     print_list();
-
+    last_to_first();
+    Node *node = search(200);
+    if (node)
+    {
+        printf("Data : %d\n", node->data);
+    }
+    else
+    {
+        printf("Not Found!\n");
+    }
     printf("Length of list: %d\n", length());
+
     return 0;
 }
