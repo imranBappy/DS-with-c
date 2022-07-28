@@ -6,22 +6,14 @@ int binary_search(int arr[], int n, int target, int lv, int uv)
     {
         int mid = (lv + uv) / 2;
         if (arr[mid] == target)
-        {
             return mid;
-        }
         else if (arr[mid] > target)
-        {
             binary_search(arr, n, target, lv, mid - 1);
-        }
         else
-        {
             binary_search(arr, n, target, mid + 1, uv);
-        }
     }
     else
-    {
         return -1;
-    }
 }
 void swap(int *a, int *b)
 {
