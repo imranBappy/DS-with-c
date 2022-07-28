@@ -23,11 +23,27 @@ int binary_search(int arr[], int n, int target, int lv, int uv)
         return -1;
     }
 }
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void bubble_sort(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n - 1 - i; j++)
+            if (arr[j] > arr[j + 1])
+                swap(arr + j, arr + j + 1);
+}
 
 int main()
 {
-    int arr[5] = {1,4,5,7,9};
-    
-    printf("%d\n", binary_search(arr, 5, 9, 0,4));
+    int arr[5] = {4, 2, 4, 6, 1};
+    bubble_sort(arr, 5);
+    for (int i = 0; i < 5; i++)
+        printf("%d, ", arr[i]);
+
+    printf("\n%d\n", binary_search(arr, 5, 1, 0, 4));
     return 0;
 }
