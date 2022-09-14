@@ -8,7 +8,13 @@ struct node
     Node *left;
     Node *right;
 };
+Node *create_node(int data);
+void add_left_child(Node *node, Node *child);
+void add_right_child(Node *node, Node *child);
+Node *insert_node(Node *root, Node *node);
+void insert_tree_node(Node *root, Node *node);
 
+Node *min_node(Node *root);
 Node *create_node(int data)
 {
     Node *newNode = (Node *)malloc(sizeof(Node));
@@ -98,6 +104,13 @@ void print_tree(Node *node, int count)
 {
     print_space(count);
     printf("Root : %d\n", node->data);
+    if (!node->right || !node->left)
+    {
+        print_space(count);
+        printf("Left : %d\n", node->left->data);
+        return;
+    }
+
     if (node->left->left)
     {
         print_space(count);
@@ -146,22 +159,71 @@ Node *bst_search(Node *root, int data)
     if (node == NULL)
         return node;
 }
+Node *min_node(Node *root)
+{
+    while (root->left)
+        root = root->left;
+    return root;
+}
+int max_node(Node *root)
+{
+    while (root->right)
+        root = root->right;
+    return root->data;
+}
+Node *bst_transplant(Node *root, Node *current_node, Node *new_node)
+{
+    if (current_node == root)
+        root = new_node;
+    else if (current_node == current_node->parent->left)
+        add_left_child(current_node->parent, new_node);
+    else
+        add_right_child(current_node, new_node);
+
+    return root;
+}
+
+Node *bst_delete(Node *root, Node *node)
+{
+    Node *smallest_node;
+    if (node->left == NULL)
+    {
+        bst_transplant(root, node, node->right);
+    }
+    else if (node->right == NULL)
+    {
+        bst_transplant(root, node, node->left);
+    }
+    else
+    {
+        smallest_node = min_node(node->right);
+        if (smallest_node->parent != node)
+        {
+            root = bst_transplant(root, smallest_node, smallest_node->right);
+            add_right_child(smallest_node, node->right);
+        }
+        root = bst_transplant(root, node, smallest_node);
+        add_left_child(smallest_node, node->left);
+    }
+    free(node);
+    return root;
+}
 int main()
 {
     Node *root = create_node(10);
-    int arr[] = {8, 5, 17, 3, 7, 12, 19, 1, 4};
+    // int arr[] = {8, 5, 17, 3, 7, 12, 19, 1, 4};
+    int arr[] = {9, 5, 17, 3, 7, 12, 19, 1, 4, 13};
     bst_input(root, arr);
-
+    inOrder_print(root);
+    printf("\n");
     print_tree(root, 0);
 
     printf("\n");
-    inOrder_print(root);
 
-    printf("\n");
-    Node *result = bst_search(root, 19);
-    if (result == NULL)
-        printf("\nNot Found\n");
-    else
-        printf("\nFound : %d\n", result->data);
+    Node *find = bst_search(root, 12);
+    root = bst_delete(root, find);
+    inOrder_print(root);
+    print_tree(root, 0);
+
     return 0;
 }
