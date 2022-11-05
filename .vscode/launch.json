@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "f:/C/ds",
-      "program": "f:/C/ds/build/Debug/outDebug",
+      "cwd": "c:/work/dev/ds-with-c",
+      "program": "c:/work/dev/ds-with-c/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

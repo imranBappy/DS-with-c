@@ -44,5 +44,10 @@ int main()
 
     printList(head);
 
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     printf("1");
+    // }
+
     return 0;
 }

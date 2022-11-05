@@ -1,15 +1,5 @@
 {
-  "files.associations": {
-    "stack": "c",
-    "xlocale": "c",
-    "stdio.h": "c",
-    "array": "c",
-    "string": "c",
-    "string_view": "c",
-    "ostream": "c",
-    "iostream": "cpp"
-  },
-  "C_Cpp_Runner.cCompilerPath": "gcc",
+  "C_Cpp_Runner.cCompilerPath": "C:/MinGW/bin/gcc.exe",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
   "C_Cpp_Runner.cStandard": "",
@@ -37,5 +27,11 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "files.associations": {
+    "*.php": "html",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "new": "cpp"
+  }
 }
